@@ -31,8 +31,7 @@ class _HomeState extends State<CustomNavigationBar> {
       overlayColor: Colors.black.withOpacity(0.5),
       overlayWidget: Center(
         child: CircularProgressIndicator(
-          color: Colors.deepPurple,
-          // valueColor: AlwaysStoppedAnimation<Color>(Colors.deepPurple),
+          color: navBarColor,
         ),
       ),
       child: Scaffold(
@@ -42,9 +41,9 @@ class _HomeState extends State<CustomNavigationBar> {
         ),
         body: _widgetOptions.elementAt(_currentIndex),
         bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Color.fromARGB(255, 32, 5, 36),
+          backgroundColor: navBarColor,
           selectedItemColor: Color.fromARGB(255, 255, 255, 255),
-          unselectedItemColor: Color.fromARGB(255, 156, 139, 139),
+          unselectedItemColor: Color.fromARGB(255, 122, 166, 233),
           currentIndex: _currentIndex,
           onTap: (index) {
             setState(() {
