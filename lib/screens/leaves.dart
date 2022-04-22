@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:newapp/config/config.dart';
 import 'package:newapp/theme.dart';
 import 'package:newapp/widgets/leave_card.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -43,7 +44,7 @@ class _LeavesState extends State<Leaves> {
     var userJson = json.decode(user!);
     var userId = userJson['_id'];
     Uri url = Uri.parse(
-        "http://192.168.159.123:3000/api/leave/getLeavesByUserId/$userId");
+        "$apiUrl/api/leave/getLeavesByUserId/$userId");
     var res = await http.get(url, headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': 'jwt $token',

@@ -5,6 +5,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:newapp/config/config.dart';
 import 'package:newapp/theme.dart';
 import 'package:newapp/widgets/app_bar.dart';
 import 'package:file_picker/file_picker.dart';
@@ -59,7 +60,7 @@ class _AddLeaveWidgetState extends State<AddLeaveWidget> {
     var userJson = json.decode(user!);
     var token = sharedPreferences.getString('token');
     var from = userJson['_id'];
-    Uri url = Uri.parse("http://192.168.159.123:3000/api/leave/addLeave");
+    Uri url = Uri.parse("$apiUrl/api/leave/addLeave");
     var body = <String, String>{};
     body['from'] = from;
     body['type'] = _salutation;

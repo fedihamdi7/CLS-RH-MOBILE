@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:newapp/config/config.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
@@ -28,7 +29,7 @@ class _ProfileState extends State<Profile> {
     var userJson = json.decode(user!);
     var userId = userJson['_id'];
     Uri url = Uri.parse(
-        "http://192.168.159.123:3000/api/employee/getEmployeeById/$userId");
+        "$apiUrl/api/employee/getEmployeeById/$userId");
     var res = await http.get(url, headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': 'jwt $token',

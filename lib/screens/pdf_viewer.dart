@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
+import 'package:newapp/config/config.dart';
 import 'package:newapp/theme.dart';
 import 'package:newapp/widgets/app_bar.dart';
 import 'package:path_provider/path_provider.dart';
@@ -28,8 +29,8 @@ class _PDFViewerState extends State<PDFViewer> {
     super.initState();
     setState(() {
       url = widget.type! == "document"
-          ? "http://192.168.159.123:3000/assets/certifications/"
-          : "http://192.168.159.123:3000/assets/leaves/accepted/";
+          ? "$apiUrl/assets/certifications/"
+          : "$apiUrl/assets/leaves/accepted/";
     });
   }
 

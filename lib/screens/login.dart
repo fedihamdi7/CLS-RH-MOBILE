@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:newapp/config/config.dart';
 import 'package:newapp/theme.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
@@ -29,7 +30,7 @@ class _LoginState extends State<Login> {
       SmartDialog.showToast("Please enter email and password");
     } else {
       SmartDialog.showLoading();
-      Uri url = Uri.parse("http://192.168.159.123:3000/api/employee/login");
+      Uri url = Uri.parse("$apiUrl/api/employee/login");
       var res = await http.post(url,
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',

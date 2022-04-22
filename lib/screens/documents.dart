@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
+import 'package:newapp/config/config.dart';
 import 'package:newapp/theme.dart';
 import 'package:newapp/widgets/document_card.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -36,7 +37,7 @@ class _DocumentsState extends State<Documents> {
     var userJson = json.decode(user!);
     var userId = userJson['_id'];
     Uri url = Uri.parse(
-        "http://192.168.159.123:3000/api/employee/getMyRequests/$userId");
+        "$apiUrl/api/employee/getMyRequests/$userId");
     var res = await http.get(url, headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': 'jwt $token',
@@ -66,7 +67,7 @@ class _DocumentsState extends State<Documents> {
     userJson['type'] = type;
     // convert userJson to string
     var userString = json.encode(userJson);
-    Uri url = Uri.parse("http://192.168.159.123:3000/api/employee/addRequest/");
+    Uri url = Uri.parse("$apiUrl/api/employee/addRequest/");
     var res = await http.post(url,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',

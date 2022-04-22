@@ -48,6 +48,7 @@ dependencies:
   syncfusion_flutter_datepicker: ^20.1.50
   file_picker: ^4.5.1
   syncfusion_flutter_pdfviewer: ^20.1.50-beta
+  onesignal_flutter: ^3.3.0
   
 
 dev_dependencies:
