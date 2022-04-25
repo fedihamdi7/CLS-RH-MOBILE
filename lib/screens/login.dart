@@ -7,6 +7,7 @@ import 'package:newapp/config/config.dart';
 import 'package:newapp/theme.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
@@ -39,6 +40,7 @@ class _LoginState extends State<Login> {
       var jsonResponse = json.decode(res.body);
       SmartDialog.dismiss();
       if (jsonResponse['success']) {
+        await initPlatform();
         // put token and user in shared prefs
         var user = json.encode(jsonResponse['user']);
         prefs.setString('token', jsonResponse['token']);
@@ -49,6 +51,29 @@ class _LoginState extends State<Login> {
         SmartDialog.showToast(jsonResponse["message"]);
       }
     }
+  }
+
+  Future<void> initPlatform() async {
+    await OneSignal.shared.setAppId("a7195059-2c3e-4434-8619-6a551b0bc3ae");
+    await OneSignal.shared
+        .getDeviceState()
+        .then((value) => {updateDeviceID(value!.userId)});
+  }
+
+  Future<void> updateDeviceID(deviceID) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.getString('token');
+    var user = prefs.getString('user');
+    //convert user to json
+    var userJson = json.decode(user!);
+    var userId = userJson['_id'];
+    Uri url = Uri.parse("$apiUrl/api/employee/updateDeviceId/$userId");
+    var res = await http.put(url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'jwt $token',
+        },
+        body: jsonEncode({"device_id": deviceID}));
   }
 
   @override

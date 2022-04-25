@@ -39,7 +39,6 @@ class _MyAppState extends State<MyApp> {
           'Authorization': 'jwt $token',
         },
         body: jsonEncode({"device_id": deviceID}));
-    var jsonResponse = json.decode(res.body);
   }
 
   Future<void> initPlatform() async {
